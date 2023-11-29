@@ -1,0 +1,3 @@
+[submodule "2016/advent-of-code-rust"]
+	path = 2016/advent-of-code-rust
+	url = git@github.com:fspoettel/advent-of-code-rust.git
