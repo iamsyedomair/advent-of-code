@@ -9,8 +9,8 @@ opcodes = ('AND', 'LSHIFT', 'NOT')
 wires = dict()
 
 """
-and = lambda x, y: x && y
-or = lambda x, y: x || y
+and = lambda x, y: x & y
+or = lambda x, y: x | y
 lshift = lambda x, y: x << y
 rshift = lambda x, y: x >> y
 not = lambda x: ~x
