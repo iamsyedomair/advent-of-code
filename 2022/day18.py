@@ -1,6 +1,15 @@
-droplets = [tuple(map(int, i.split(','))) for i in open('day18.txt').read().strip().split('\n')]
+droplets = [tuple(map(int, i.split(','))) for i in open('inp.txt').read().strip().split('\n')]
+s = set(droplets)
 
-start = droplets[0]
+diff = [(1,0,0),(-1,0,0),(0,1,0),(0,-1,0),(0,0,1),(0,0,-1)]
+
+total = 0
+for drop in droplets:
+    ns = [tuple(map(sum,zip(drop, i))) for i in diff]
+    total += 6 - sum([1 for n in ns if n in s])
+    
+print(total)
+
 
 """
 breadth first search version
@@ -12,4 +21,5 @@ breadth first search version
     return faces 
 """
 
-print(droplets)
+
+
