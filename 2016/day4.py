@@ -1,26 +1,23 @@
 import re
+from collections import Counter
 
-with open('day4.txt') as f:
-    inp = f.read().strip().split('\n')
-
-inp = ["aaaaa-bbb-z-y-x-123[abxyz]"]
+inp = open('inp.txt').read().strip().split('\n')
 pattern = '(\S+)\[(\w+)\]'
-real = []
-for i in inp:
-    name, checksum = re.match(pattern, i).groups()
-    name = name.split('-')
-    name, ID = ''.join(name[:-1]), name[-1]
-    print(name, ID, checksum)
-    max_len = float('inf') 
-    idx = -1
-    for char in checksum:
-        pat = re.findall(f"({char}+)", name)
-        if pat:
-            pat = sorted(pat, key=lambda x:len(x))
-            idx = name.find(pat[0])
-            
-            print(idx)
-        break
+ans = 0
 
-    print(name, ID, checksum)
-    break
+for i in inp:
+    name, check = re.match(pattern, i).groups()
+    name = name.split('-')
+    name, ID = ''.join(name[:-1]), int(name[-1]) 
+    lst = sorted(list(Counter(name).items()), key=lambda x:(-x[1], x[0]))[:5] 
+    if check == ''.join(i[0] for i in lst):
+        ans += ID 
+
+print(ans)
+
+for i in inp:
+    name, check = re.match(pattern, i).groups()
+    if check == ''.join(i[0] for i in sorted(Counter(''.join(name.split('-')[:-1])).items(), key=lambda x:(-x[1],x[0]))[:5]):
+        d = ''.join(' ' if c=='-' else chr((ord(c)-97+int(name.split('-')[-1]))%26+97) for c in '-'.join(name.split('-')[:-1]))
+        if 'north' in d: 
+            print(int(name.split('-')[-1]))

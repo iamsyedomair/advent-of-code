@@ -1,4 +1,4 @@
-with open('day3.txt') as f:
+with open('inp.txt') as f:
     inp = f.read().strip().split()
 
 a = len(inp[0])
